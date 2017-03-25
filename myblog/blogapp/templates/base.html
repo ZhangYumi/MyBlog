@@ -1,0 +1,65 @@
+{% load staticfiles %}
+{% load custom_markdown %}
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>玉米的博客</title>
+<link href="{% static "css/styles.css" %}" rel="stylesheet">
+<link href="{% static "css/animation.css" %}" rel="stylesheet"> 
+<!-- 返回顶部调用 begin -->
+<link href="{% static "css/lrtk.css" %}" rel="stylesheet" />
+<script type="text/javascript" src="{% static "js/jquery.js" %}"></script>
+<script type="text/javascript" src="{% static "js/js.js" %}"></script>
+<!-- 返回顶部调用 end-->
+<!--[if lt IE 9]>
+<script src="{% static "js/modernizr.js" %}"></script>  
+<![endif]-->
+</head>
+<body>
+<header>
+  <nav id="nav">
+    <ul>
+      <li><a href="/" >首页</a></li>
+      <li><a href="/tech" " title="挨踢技术">IT技术</a></li>
+      <li><a href="/life" " title="人生琐事">生活随笔</a></li>
+      <li><a href="/" " title="">文章归档</a></li>
+    </ul>
+    <script src="{% static "js/silder.js" %}"></script><!--获取当前页导航 高亮显示标题--> 
+  </nav>
+</header>
+{% block bodycontent %}
+{% endblock bodycontent %}
+<footer>
+  <div class="footer-mid">
+    <div class="links">
+      <h2>友情链接</h2>
+      <ul>
+        <li><a href="http://blog.csdn.net/c_monkeydream">我的CSDN</a></li>
+      </ul>
+    </div>
+  
+ <!--   <section class="flickr">
+     <h2>摄影作品</h2>
+      <ul>
+        <li><a href="/"><img src="{% static "images/01.jpg" %}"></a></li>
+        <li><a href="/"><img src="{% static "images/02.jpg" %}"></a></li>
+        <li><a href="/"><img src="{% static "images/03.jpg" %}"></a></li>
+        <li><a href="/"><img src="{% static "images/04.jpg" %}"></a></li>
+        <li><a href="/"><img src="{% static "images/05.jpg" %}"></a></li>
+        <li><a href="/"><img src="{% static "images/06.jpg" %}"></a></li>
+        <li><a href="/"><img src="{% static "images/07.jpg" %}"></a></li>
+        <li><a href="/"><img src="{% static "images/08.jpg" %}"></a></li>
+        <li><a href="/"><img src="{% static "images/09.jpg" %}"></a></li>
+      </ul>  
+    </section>  -->
+  </div>
+  <div class="footer-bottom">
+    <p>Copyright 2013 Design by yumi</p>
+  </div>
+</footer>
+<!-- jQuery仿腾讯回顶部和建议 代码开始 -->
+<div id="tbox"><a id="gotop" href="javascript:void(0)"></a> </div> 
+<!-- 代码结束 -->
+</body>
+</html>

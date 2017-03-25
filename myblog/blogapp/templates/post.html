@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block bodycontent %}
+{% load custom_markdown %}
+<link href="{% static "css/view.css" %}" rel="stylesheet">
+<!--header end-->
+<div id="mainbody">
+  <div class="blogs">
+    <div id="index_view">
+      <h2 class="t_nav"><a href="/">上一页</a><a href="/">下一页</a></h2>        
+      <h1 class="c_titile">{{post.art_title}}</h1>
+      <p class="box">发布时间：{{post.art_datetime | date:"Y / m /d"}}<span>编辑：yumi</span>阅读（{{post.art_clicknum}}）</p>
+      <ul>{{post.art_content | custom_markdown}}</ul>
+      <div class="share"> 
+        <!-- Baidu Button BEGIN -->
+        <div id="bdshare" class="bdshare_t bds_tools get-codes-bdshare"> <span class="bds_more">分享到：</span> <a class="bds_qzone"></a> <a class="bds_tsina"></a> <a class="bds_tqq"></a> <a class="bds_renren"></a> <a class="bds_t163"></a> <a class="shareCount"></a> </div>
+        <script type="text/javascript" id="bdshare_js" data="type=tools&amp;uid=6574585" ></script> 
+        <script type="text/javascript" id="bdshell_js"></script> 
+        <script type="text/javascript">
+document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static/js/shell_v2.js?cdnversion=" + Math.ceil(new Date()/3600000)
+</script> 
+        <!-- Baidu Button END --> 
+      </div>
+
+    </div>     
+    <!--bloglist end-->
+    <aside>
+      <div class="search">
+        <form class="searchform" method="get" action="#">
+          <input type="text" name="s" value="Search" onfocus="this.value=''" onblur="this.value='Search'">
+        </form>
+      </div>
+      <div class="sunnav">
+        <ul>
+          <li><a href="/" >首页</a></li>
+          <li><a href="/tech"  title="挨踢技术">IT技术</a></li>
+          <li><a href="/life"  title="人生琐事">生活随笔</a></li>
+          <li><a href="/"  title="文章归档">文章归档</a></li>
+        </ul>
+      </div>
+      <div class="tuijian">
+        <h2>栏目更新</h2>
+        <ol>
+          {% for recom_art in recom_arts %}
+          <li><span><strong>{{recom_art.art_category}}</strong></span><a href="/">{{recom_art.art_title}}</a></li>
+          {% endfor %}       
+        </ol>
+      </div>      
+      <div class="clicks">
+        <h2>热门点击</h2>
+        <ol>
+          {% for hot_click in hot_clicks %}
+          <li><span><a href="/">{{hot_click.art_category}}</a></span><a href="/">{{hot_click.art_title}}</a></li>
+          {% endfor %} 
+        </ol>
+      </div>
+  <!--blogs end-->
+  {%include "duoshuo.html"%} 
+</div>
+<!--mainbody end-->
+{% endblock bodycontent %}

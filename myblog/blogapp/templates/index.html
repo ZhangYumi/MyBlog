@@ -1,0 +1,116 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% load custom_markdown %}
+{% block bodycontent %}
+<!--header end-->
+<div id="mainbody">
+  <div class="info">
+    <figure> <img src="{% static "images/life.jpg" %}"  alt="Panama Hat" height="250px" width="630px">
+      <figcaption><strong>Less is More</strong> </figcaption>
+    </figure>
+    <div class="card">
+      <h1>我的名片</h1>
+<!--从数据库读数据，当跳转页面时无法获取数据
+      <p>网名：{{post_user.user_nickname}}</p>
+      <p>职业：{{post_user.user_job}}</p>
+      <p><p>公司：<a href="http://goldenstand.cn">{{post_user.user_company}}</a>
+      <p>Email：{{post_user.user_email}}</p>    -->
+      <p>网名：哆啦C梦</p>
+      <p>职业：程序猿</p>
+      <p>公司：<a href="http://goldenstand.cn">高登世德金融科技</a></p>
+      <p>Email:1083546770@qq.com</p>
+      <ul class="linkmore">
+       
+        <li><a href="/" class="talk" title="给我留言"></a></li>
+        <li><a href="/" class="address" title="联系地址"></a></li>
+        <li><a href="/" class="email" title="给我写信"></a></li>
+        <li><a href="/" class="photos" title="生活照片"></a></li>
+        <li><a href="/" class="heart" title="关注我"></a></li>
+      </ul>
+    </div>
+  </div>
+  <!--info end-->
+     <div class="blank"></div>
+  <div class="blogs">
+    <ul class="bloglist">
+{% block article %}
+      {% for article in post_art %} 
+      <li>
+        <div class="arrow_box">
+          <div class="ti"></div>
+          <!--三角形-->
+          <div class="ci"></div>
+          <!--圆形-->
+          <h2 class="title"><a href="{% url "detail" id=article.id %}" >{{article.art_title}}</a></h2>
+          <ul class="textinfo">
+  <!--          <a href="/"><img src="{{post_art.art_imgurl}}"></a>    -->
+            <p>{{article.art_content | custom_markdown | truncatechars:"250"}}</p>
+          </ul>
+          <ul class="details">
+            <li class="likes"><a href="#">{{article.art_clicknum}}</a></li>
+            <li class="comments"><a href="#">{{article.art_comment}}</a></li>
+            <li class="icon-time"><a href="#">{{article.art_datetime |date:"Y /m /d"}}</a></li>
+          </ul>
+        </div>
+        <!--arrow_box end--> 
+      </li>
+      {% endfor %}
+ <p>
+  {# topics.paginator.page_range 这个函数返回包含一个所有页码数的 range 对象 #}
+    {# 即 range(1, topics.paginator.num_pages + 1) #}
+  {% for page_number in post_art.paginator.page_range %}
+    {% ifequal page_number  post_art.number %}
+      {{ page_number }}
+    {% else %}
+      <a href="?page={{ page_number }}">{{ page_number }}
+    {% endifequal %}
+  {% endfor %}
+</p>
+{% endblock article %}
+
+      <li>
+     </ul>
+
+    <!--bloglist end-->
+          <aside>
+      <div class="tuijian">
+        <h2>推荐文章</h2>
+        <ol>
+          {% for recom_art in recom_arts %}
+          <li><span><strang><a href="/">{{recom_art.art_category}}</strang></span><a href="{% url "detail" id=recom_art.id %}">{{recom_art.art_title}}</a></li>
+          {% endfor %}       
+        </ol>
+      </div>
+      <div class="clicks">
+        <h2>热门点击</h2>
+        <ol>
+          {% for hot_click in hot_clicks %}
+          <li><span><a href="/">{{hot_click.art_category}}</a></span><a href="{% url "detail" id=hot_click.id %}">{{hot_click.art_title}}</a></li>
+          {% endfor %} 
+        </ol>
+      </div>
+   
+      <div class="search">
+        <form class="searchform" method="get" action="#">
+          <input type="text" name="s" value="Search" onfocus="this.value=''" onblur="this.value='Search'">
+        </form>
+      </div>
+      <div class="viny">
+        <dl>
+          <dt class="art"><img src="{% static "images/artwork.png" %}" alt="专辑"></dt>
+          <dd class="icon-song"><span></span>南方姑娘</dd>
+          <dd class="icon-artist"><span></span>歌手：赵雷</dd>
+          <dd class="icon-album"><span></span>所属专辑：《赵小雷》</dd>
+          <dd class="icon-like"><span></span><a href="/">喜欢</a></dd>
+          <dd class="music">
+            <audio src="{% static "music/南方姑娘.mp3" %}" controls></audio>
+          </dd>
+          <!--也可以添加loop属性 音频加载到末尾时，会重新播放-->
+        </dl>
+      </div>
+    </aside>
+  </div>
+  <!--blogs end--> 
+</div>
+<!--mainbody end-->
+{% endblock bodycontent %}

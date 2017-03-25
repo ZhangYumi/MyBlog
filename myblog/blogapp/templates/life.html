@@ -1,0 +1,39 @@
+{% extends "index.html" %}
+{% load staticfiles %}
+{% load custom_markdown %}
+{% block article %}
+{% for life in life_list %} 
+      <li>
+        <div class="arrow_box">
+          <div class="ti"></div>
+          <!--三角形-->
+          <div class="ci"></div>
+          <!--圆形-->
+          <h2 class="title"><a href="{% url "detail" id=life.id %}" >{{life.art_title}}</a></h2>
+          <ul class="textinfo">
+  <!--          <a href="/"><img src="{{post_art.art_imgurl}}"></a>    -->
+            <p>{{life.art_content | custom_markdown | truncatechars:"250"}}</p>
+          </ul>
+          <ul class="details">
+            <li class="likes"><a href="#">{{life.art_clicknum}}</a></li>
+            <li class="comments"><a href="#">{{life.art_comment}}</a></li>
+            <li class="icon-time"><a href="#">{{life.art_datetime |date:"Y /m /d"}}</a></li>
+          </ul>
+        </div>
+        <!--arrow_box end--> 
+      </li>
+      {% endfor %}
+<p>
+  {# topics.paginator.page_range 这个函数返回包含一个所有页码数的 range 对象 #}
+    {# 即 range(1, topics.paginator.num_pages + 1) #}
+  {% for page_number in life_list.paginator.page_range %}
+    {% ifequal page_number  life_list.number %}
+      {{ page_number }}
+    {% else %}
+      <a href="?page={{ page_number }}">{{ page_number }}
+    {% endifequal %}
+  {% endfor %}
+</p>
+
+{% endblock article %}
+
